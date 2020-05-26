@@ -15,22 +15,29 @@ This image will help you build Rabbitq Cluster easyly
 ## Installation
 
  * First create docker volume in host you want to setup: 
+ ```bash
   	+ rm -rf /usr/share/docker/rabbitmq/rabbitmq/
 	+ rm -rf /u01/docker/docker_log/rabbitmq/
 	+ rm -rf  /var/lib/rabbitmq
 	+ mkdir -p /u01/docker/docker_log/rabbitmq/
 	+ mkdir  -p  /usr/share/docker/rabbitmq/rabbitmq/rabbitmq-data/
-
+```
  * Second create Earlang.cookie for this Cluster:
+ ```bash
 	+ echo  "VZDYBEEEQDCBCHSKENTY" > /usr/share/docker/rabbitmq/rabbitmq/.erlang.cookie 
 	+ chown -R 1014:1012 /usr/share/docker/rabbitmq/
 	+ chown -R 1014:1012 /u01/docker/docker_log/rabbitmq/
+```
  * For First Node in Cluster run:
+ ```bash
  	+ docker run  -d  --network=host --name rabbitq-server --privileged  -v /u01/docker/docker_log/rabbitmq:/var/log/rabbitmq   -v /usr/share/docker/:/usr/share/docker/  -v /var/lib/rabbitmq:/var/lib/rabbitmq:shared   -u root -e RABBITMQ_START='BOOTSTRAP'   -e OPENSTACK_PASSWORD="opspassword"   tovanlam/rabbitmq:latest
-   	<!---You should change opspassword to the password you want to use in openstack infrastructure--->
+   	+You should change opspassword to the password you want to use in openstack infrastructure
+```
  * For another Node in Cluster run:
+ ```bash
  	+ docker run  -d  --network=host  --name rabbitq-server --privileged  -v /u01/docker/docker_log/rabbitmq:/var/log/rabbitmq    -v /usr/share/docker/:/usr/share/docker/  -v /var/lib/rabbitmq:/var/lib/rabbitmq:shared  -u root -e RABBITMQ_START='INIT_RABBITMQ_CLUSTER'   -e RABBITMQ_HUB="RABBITMQHUB"  tovanlam/rabbitmq:latest
- 	<!---with RABBITMQHUB is hostname or ip of first Node.--->
+ 	with RABBITMQHUB is hostname or ip of first Node.
+```
 
 
 ## Tutorials & Documentation
