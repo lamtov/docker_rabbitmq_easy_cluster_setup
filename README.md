@@ -15,11 +15,11 @@ This image will help you build Rabbitq Cluster easyly
 ## Installation
 
  * First create docker volume in host you want to setup: 
-  	rm -rf /usr/share/docker/rabbitmq/rabbitmq/
-	rm -rf /u01/docker/docker_log/rabbitmq/
-	rm -rf  /var/lib/rabbitmq
-	mkdir -p /u01/docker/docker_log/rabbitmq/
-	mkdir  -p  /usr/share/docker/rabbitmq/rabbitmq/rabbitmq-data/
+  	+ rm -rf /usr/share/docker/rabbitmq/rabbitmq/
+	+ rm -rf /u01/docker/docker_log/rabbitmq/
+	+ rm -rf  /var/lib/rabbitmq
+	+ mkdir -p /u01/docker/docker_log/rabbitmq/
+	+ mkdir  -p  /usr/share/docker/rabbitmq/rabbitmq/rabbitmq-data/
 
  * Second create Earlang.cookie for this Cluster:
 	echo  "VZDYBEEEQDCBCHSKENTY" > /usr/share/docker/rabbitmq/rabbitmq/.erlang.cookie 
