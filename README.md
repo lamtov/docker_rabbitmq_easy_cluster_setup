@@ -9,7 +9,7 @@
  * RABBITMQ 
 
 This image will help you build Rabbitq Cluster easyly
-
+Link to DockerHub: docker pull tovanlam/rabbitmq:tagname
 
 
 ## Installation
