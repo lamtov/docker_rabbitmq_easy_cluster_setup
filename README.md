@@ -16,7 +16,7 @@ This image will help you build Rabbitq Cluster easyly
 
  * First create docker volume in host you want to setup: 
  ```bash
-  	+ rm -rf /usr/share/docker/rabbitmq/rabbitmq/
+ 	+ rm -rf /usr/share/docker/rabbitmq/rabbitmq/
 	+ rm -rf /u01/docker/docker_log/rabbitmq/
 	+ rm -rf  /var/lib/rabbitmq
 	+ mkdir -p /u01/docker/docker_log/rabbitmq/
