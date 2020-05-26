@@ -1,88 +1,63 @@
-# Project Title
+# RabbitMQ Server Easy Cluster Setup
 
-One Paragraph of project description goes here
+[RabbitMQ](https://rabbitmq.com) is a [feature rich](https://rabbitmq.com/documentation.html), multi-protocol messaging broker. It supports:
 
-## Getting Started
+ * AMQP 0-9-1
+ * AMQP 1.0
+ * MQTT 3.1.1
+ * STOMP 1.0 through 1.2
+ * RABBITMQ 
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+This image will help you build Rabbitq Cluster easyly
 
-### Prerequisites
 
-What things you need to install the software and how to install them
 
-```
-Give examples
-```
+## Installation
 
-### Installing
+ * First create docker volume in host you want to setup: 
+  	rm -rf /usr/share/docker/rabbitmq/rabbitmq/
+	rm -rf /u01/docker/docker_log/rabbitmq/
+	rm -rf  /var/lib/rabbitmq
+	mkdir -p /u01/docker/docker_log/rabbitmq/
+	mkdir  -p  /usr/share/docker/rabbitmq/rabbitmq/rabbitmq-data/
 
-A step by step series of examples that tell you how to get a development env running
+ * Second create Earlang.cookie for this Cluster:
+	echo  "VZDYBEEEQDCBCHSKENTY" > /usr/share/docker/rabbitmq/rabbitmq/.erlang.cookie 
+	chown -R 1014:1012 /usr/share/docker/rabbitmq/
+	chown -R 1014:1012 /u01/docker/docker_log/rabbitmq/
+ * For First Node in Cluster run:
+ 	docker run  -d  --network=host --name rabbitq-server --privileged  -v /u01/docker/docker_log/rabbitmq:/var/log/rabbitmq   -v /usr/share/docker/:/usr/share/docker/  -v /var/lib/rabbitmq:/var/lib/rabbitmq:shared   -u root -e RABBITMQ_START='BOOTSTRAP'   -e OPENSTACK_PASSWORD="opspassword"   tovanlam/rabbitmq:latest
+   	You should change opspassword to the password you want to use in openstack infrastructure
+ * For another Node in Cluster run:
+ 	docker run  -d  --network=host  --name rabbitq-server --privileged  -v /u01/docker/docker_log/rabbitmq:/var/log/rabbitmq    -v /usr/share/docker/:/usr/share/docker/  -v /var/lib/rabbitmq:/var/lib/rabbitmq:shared  -u root -e RABBITMQ_START='INIT_RABBITMQ_CLUSTER'   -e RABBITMQ_HUB="RABBITMQHUB"  tovanlam/rabbitmq:latest
+ 	with RABBITMQHUB is hostname or ip of first Node.
 
-Say what the step will be
 
-```
-Give the example
-```
+## Tutorials & Documentation
 
-And repeat
+ * To view cluster info run:
+ 	docker exec -it rabbitmq-server rabbitmqctl cluster_status
+ 	docker exec -it rabbitmq-server rabbitmqctl status
+ * When done setup cluster exit each Node out and rejoin cluster by command:
+ 	docker run  -d  --name rabbitmq --network=host --privileged -v /u01/docker/docker_log/rabbitmq:/var/log/rabbitmq  -v /var/lib/rabbitmq/:/var/lib/rabbitmq/:shared  -v /usr/share/docker/:/usr/share/docker/    -u root -e RABBITMQ_START='START_RABBITMQ'   -e RABBITMQ_HUB="compute03"  tovanlam/rabbitmq:latest
+ * [CLI tools guide](https://rabbitmq.com/cli.html) 
+ * [Configuration guide](https://rabbitmq.com/configure.html) 
+ * [Client libraries and tools](https://rabbitmq.com/devtools.html)
 
-```
-until finished
-```
 
-End with an example of getting some data out of the system or using it for a little demo
 
-## Running the tests
+## Getting Help
+ * See how it work in start.sh
+ *  my email: tovanlam20132223@gmail.com
+ * [Commercial support](https://rabbitmq.com/services.html) from [Pivotal](https://pivotal.io) for open source RabbitMQ
+ * [Community Slack](https://rabbitmq-slack.herokuapp.com/)
 
-Explain how to run the automated tests for this system
 
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Questions about contributing, internals and so on are very welcome on the mail
 
-## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
 

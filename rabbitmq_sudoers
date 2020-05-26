@@ -1,0 +1,5 @@
+Defaults:rabbitmq !requiretty
+
+rabbitmq ALL = (root) NOPASSWD: /usr/bin/rabbitmq-rootwrap /etc/rabbitmq/rootwrap.conf *
+rabbitmq ALL=(root) NOPASSWD:SETENV: /usr/local/bin/copy_file.sh
+
