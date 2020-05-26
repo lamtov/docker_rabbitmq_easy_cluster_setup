@@ -1,4 +1,4 @@
-FROM base_v2:q
+FROM tovanlam/base_image
 MAINTAINER lamtv10@viettel.com.vn
 
 LABEL openstack_version="queens"
