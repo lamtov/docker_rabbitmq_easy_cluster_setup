@@ -8,7 +8,7 @@
  * STOMP 1.0 through 1.2
  * RABBITMQ 
 
-This image will help you build Rabbitq Cluster easyly
+This image will help you build Rabbitq Cluster easyly \n
 Link to DockerHub: docker pull tovanlam/rabbitmq:tagname
 
 
