@@ -22,24 +22,24 @@ This image will help you build Rabbitq Cluster easyly
 	+ mkdir  -p  /usr/share/docker/rabbitmq/rabbitmq/rabbitmq-data/
 
  * Second create Earlang.cookie for this Cluster:
-	echo  "VZDYBEEEQDCBCHSKENTY" > /usr/share/docker/rabbitmq/rabbitmq/.erlang.cookie 
-	chown -R 1014:1012 /usr/share/docker/rabbitmq/
-	chown -R 1014:1012 /u01/docker/docker_log/rabbitmq/
+	+ echo  "VZDYBEEEQDCBCHSKENTY" > /usr/share/docker/rabbitmq/rabbitmq/.erlang.cookie 
+	+ chown -R 1014:1012 /usr/share/docker/rabbitmq/
+	+ chown -R 1014:1012 /u01/docker/docker_log/rabbitmq/
  * For First Node in Cluster run:
- 	docker run  -d  --network=host --name rabbitq-server --privileged  -v /u01/docker/docker_log/rabbitmq:/var/log/rabbitmq   -v /usr/share/docker/:/usr/share/docker/  -v /var/lib/rabbitmq:/var/lib/rabbitmq:shared   -u root -e RABBITMQ_START='BOOTSTRAP'   -e OPENSTACK_PASSWORD="opspassword"   tovanlam/rabbitmq:latest
-   	You should change opspassword to the password you want to use in openstack infrastructure
+ 	+ docker run  -d  --network=host --name rabbitq-server --privileged  -v /u01/docker/docker_log/rabbitmq:/var/log/rabbitmq   -v /usr/share/docker/:/usr/share/docker/  -v /var/lib/rabbitmq:/var/lib/rabbitmq:shared   -u root -e RABBITMQ_START='BOOTSTRAP'   -e OPENSTACK_PASSWORD="opspassword"   tovanlam/rabbitmq:latest
+   	#You should change opspassword to the password you want to use in openstack infrastructure
  * For another Node in Cluster run:
- 	docker run  -d  --network=host  --name rabbitq-server --privileged  -v /u01/docker/docker_log/rabbitmq:/var/log/rabbitmq    -v /usr/share/docker/:/usr/share/docker/  -v /var/lib/rabbitmq:/var/lib/rabbitmq:shared  -u root -e RABBITMQ_START='INIT_RABBITMQ_CLUSTER'   -e RABBITMQ_HUB="RABBITMQHUB"  tovanlam/rabbitmq:latest
- 	with RABBITMQHUB is hostname or ip of first Node.
+ 	+ docker run  -d  --network=host  --name rabbitq-server --privileged  -v /u01/docker/docker_log/rabbitmq:/var/log/rabbitmq    -v /usr/share/docker/:/usr/share/docker/  -v /var/lib/rabbitmq:/var/lib/rabbitmq:shared  -u root -e RABBITMQ_START='INIT_RABBITMQ_CLUSTER'   -e RABBITMQ_HUB="RABBITMQHUB"  tovanlam/rabbitmq:latest
+ 	# with RABBITMQHUB is hostname or ip of first Node.
 
 
 ## Tutorials & Documentation
 
  * To view cluster info run:
- 	docker exec -it rabbitmq-server rabbitmqctl cluster_status
- 	docker exec -it rabbitmq-server rabbitmqctl status
+ 	+ docker exec -it rabbitmq-server rabbitmqctl cluster_status
+ 	+ docker exec -it rabbitmq-server rabbitmqctl status
  * When done setup cluster exit each Node out and rejoin cluster by command:
- 	docker run  -d  --name rabbitmq --network=host --privileged -v /u01/docker/docker_log/rabbitmq:/var/log/rabbitmq  -v /var/lib/rabbitmq/:/var/lib/rabbitmq/:shared  -v /usr/share/docker/:/usr/share/docker/    -u root -e RABBITMQ_START='START_RABBITMQ'   -e RABBITMQ_HUB="compute03"  tovanlam/rabbitmq:latest
+ 	+ docker run  -d  --name rabbitmq --network=host --privileged -v /u01/docker/docker_log/rabbitmq:/var/log/rabbitmq  -v /var/lib/rabbitmq/:/var/lib/rabbitmq/:shared  -v /usr/share/docker/:/usr/share/docker/    -u root -e RABBITMQ_START='START_RABBITMQ'   -e RABBITMQ_HUB="compute03"  tovanlam/rabbitmq:latest
  * [CLI tools guide](https://rabbitmq.com/cli.html) 
  * [Configuration guide](https://rabbitmq.com/configure.html) 
  * [Client libraries and tools](https://rabbitmq.com/devtools.html)
