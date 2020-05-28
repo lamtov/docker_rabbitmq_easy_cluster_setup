@@ -1,3 +1,4 @@
+![Docker Image CI](https://github.com/lamto20132223/Docker_RabbitMq_Easy_Cluster/workflows/Docker%20Image%20CI/badge.svg?branch=master&event=check_run) ![rabbitmq-server] ![rabbitmq-cluster]
 # RabbitMQ Server Easy Cluster Setup
 
 [RabbitMQ](https://rabbitmq.com) is a [feature rich](https://rabbitmq.com/documentation.html), multi-protocol messaging broker. It supports:
@@ -12,7 +13,7 @@ This image will help you build Rabbitq Cluster easyly
 
 Link to DockerHub: https://hub.docker.com/r/tovanlam/rabbitmq
 
-![Docker Image CI](https://github.com/lamto20132223/Docker_RabbitMq_Easy_Cluster/workflows/Docker%20Image%20CI/badge.svg?branch=master&event=check_run)
+
 ## Installation
 
  * First create docker volume in host you want to setup: 
