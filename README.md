@@ -52,9 +52,9 @@ This image will help you build Rabbitq Cluster easyly
  ```
  * When done setup cluster exit each Node out and rejoin cluster by command:
  ```bash
- 	docker stop rabbitmq-server
- 	docker rm rabbitmq-server
- 	docker run  -d  --name rabbitmq-server --network=host --privileged -v /u01/docker/docker_log/rabbitmq:/var/log/rabbitmq  -v /var/lib/rabbitmq/:/var/lib/rabbitmq/:shared  -v /usr/share/docker/:/usr/share/docker/    -u root -e RABBITMQ_START='START_RABBITMQ'   -e RABBITMQ_HUB="compute03"  tovanlam/rabbitmq:latest
+	docker stop rabbitmq-server
+	docker rm rabbitmq-server
+	docker run  -d  --name rabbitmq-server --network=host --privileged -v /u01/docker/docker_log/rabbitmq:/var/log/rabbitmq  -v /var/lib/rabbitmq/:/var/lib/rabbitmq/:shared  -v /usr/share/docker/:/usr/share/docker/    -u root -e RABBITMQ_START='START_RABBITMQ'   -e RABBITMQ_HUB="compute03"  tovanlam/rabbitmq:latest
  ```
  * Then you can restart each container without break cluster connection:
  ```bash
