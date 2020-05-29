@@ -12,7 +12,7 @@
 
 This image will help you build Rabbitq Cluster easyly
 
-Link to DockerHub: https://hub.docker.com/r/tovanlam/rabbitmq
+> Link to DockerHub: https://hub.docker.com/r/tovanlam/rabbitmq
 
 
 ## Installation
@@ -34,14 +34,14 @@ Link to DockerHub: https://hub.docker.com/r/tovanlam/rabbitmq
  * For First Node in Cluster run:
  ```bash
 	docker run  -d  --network=host --name rabbitmq-server --privileged  -v /u01/docker/docker_log/rabbitmq:/var/log/rabbitmq   -v /usr/share/docker/:/usr/share/docker/  -v /var/lib/rabbitmq:/var/lib/rabbitmq:shared   -u root -e RABBITMQ_START='BOOTSTRAP'   -e OPENSTACK_PASSWORD="opspassword"   tovanlam/rabbitmq:latest
-	***You should change opspassword to the password you want to use in openstack infrastructure***
 ```
+> ***You should change opspassword to the password you want to use in openstack infrastructure***
+
  * For another Node in Cluster run:
  ```bash
 	docker run  -d  --network=host  --name rabbitmq-server --privileged  -v /u01/docker/docker_log/rabbitmq:/var/log/rabbitmq    -v /usr/share/docker/:/usr/share/docker/  -v /var/lib/rabbitmq:/var/lib/rabbitmq:shared  -u root -e RABBITMQ_START='INIT_RABBITMQ_CLUSTER'   -e RABBITMQ_HUB="RABBITMQHUB"  tovanlam/rabbitmq:latest
- 	***with RABBITMQHUB is hostname or ip of first Node.***
 ```
-
+> 	***with RABBITMQHUB is hostname or ip of first Node.***
 
 ## Tutorials & Documentation
 
@@ -72,7 +72,7 @@ Link to DockerHub: https://hub.docker.com/r/tovanlam/rabbitmq
 
 ## Contributing
 
-Questions about contributing, internals and so on are very welcome on the mail
+Questions about contributing, internals and so on are very welcome on the mail *tovanlam20132223@gmail.com*
 
 
 
